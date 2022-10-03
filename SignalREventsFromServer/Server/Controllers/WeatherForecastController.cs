@@ -26,7 +26,7 @@ namespace SignalREventsFromServer.Server.Controllers
         [HttpGet]
         public async Task<IEnumerable<WeatherForecast>> Get()
         {
-            await this.hubContext.SendMessageToAllClients(sender: "Server Weather API Controller", message: "Get called!");
+            await this.hubContext.SendMessageToGroupAsync(groupName: "APIMonitor", sender: "Server Weather API Controller", message: "Get called!");
 
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
