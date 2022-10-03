@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.ResponseCompression;
+using SignalREventsFromServer.Server.Brokers.HubContexts;
 using SignalREventsFromServer.Server.Hubs;
 
 namespace SignalREventsFromServer
@@ -19,6 +20,7 @@ namespace SignalREventsFromServer
 
             builder.Services.AddControllersWithViews();
             builder.Services.AddRazorPages();
+            builder.Services.AddScoped<IHubContextBroker, HubContextBroker>();
 
             var app = builder.Build();
 
