@@ -8,8 +8,9 @@ public class EventsService : IEventsService
 
     public EventsService(IHubContextBroker hubContextBroker) => this.hubContextBroker = hubContextBroker;
 
-    public async ValueTask JoinGroupAsync(string connectionId, string groupName) =>
-        await this.hubContextBroker.JoinGroupAsync(connectionId, groupName);
+    public async ValueTask SubcribeToChannelAsync(string connectionId, string channel) =>
+        await this.hubContextBroker.JoinGroupAsync(connectionId, channel);
+
     public async ValueTask SendMessageToAllClientsAsync(string sender, string message) =>
         await this.hubContextBroker.SendMessageToAllClientsAsync(sender, message);
 

@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.SignalR;
-using SignalREventsFromServer.Server.Brokers.HubContexts;
+using SignalREventsFromServer.Server.Brokers.Identity;
 using SignalREventsFromServer.Server.Services.Events;
 
 namespace SignalREventsFromServer.Server.Hubs;
@@ -18,5 +18,7 @@ public class ChatHub : Hub<IChatHubClient>
         await eventsService.SendMessageToGroupAsync(groupName, user, message);
 
     public async Task JoinGroup(string groupName) =>
-        await eventsService.JoinGroupAsync(Context.ConnectionId, groupName);
+        await eventsService.SubcribeToChannelAsync(IdentityBroker.ConnectionId, groupName);
+
+    public IIdentityBroker IdentityBroker => new IdentityBroker(this.Context);
 }
