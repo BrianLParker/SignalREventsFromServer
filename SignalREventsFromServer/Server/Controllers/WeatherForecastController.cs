@@ -26,7 +26,7 @@ public class WeatherForecastController : ControllerBase
     [HttpGet]
     public async Task<IEnumerable<WeatherForecast>> Get()
     {
-        await this.eventsService.NotifyGetRequestAsync(controller: "WeatherForecastController");
+        await this.eventsService.NotifyControllerActionAsync(controller: "WeatherForecastController", action: "Get");
 
         return Enumerable.Range(1, 5).Select(index => new WeatherForecast
         {

@@ -38,7 +38,7 @@ public partial class Index : ComponentBase, IChatHubClient
     {
         if (hubConnection is not null)
         {
-            await hubConnection.SendAsync("JoinGroup", "APIMonitor");
+            await hubConnection.SendAsync("JoinGroup", "WeatherForecastController");
             monitorDisabled = true;
         }
     }

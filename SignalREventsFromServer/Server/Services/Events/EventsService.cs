@@ -16,11 +16,11 @@ public class EventsService : IEventsService
     public async ValueTask SendMessageToGroupAsync(string groupName, string sender, string message) =>
         await this.hubContextBroker.SendMessageToGroupAsync(groupName, sender, message);
 
-    public async ValueTask NotifyGetRequestAsync(string controller)
+    public async ValueTask NotifyControllerActionAsync(string controller, string action)
     {
-        var groupName = "APIMonitor";
-        var sender = $"{controller} Controller";
-        var message = "Get";
+        var groupName = controller;
+        var sender = $"Controller [{controller}]";
+        var message = "Action [Get]";
 
         await this.hubContextBroker.SendMessageToGroupAsync(groupName, sender, message);
     }
