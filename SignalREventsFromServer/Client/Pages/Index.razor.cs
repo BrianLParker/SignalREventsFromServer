@@ -30,7 +30,7 @@ public partial class Index : ComponentBase, IChatHubClient
     {
         if (hubConnection is not null)
         {
-            await hubConnection.SendAsync("SendMessage", userInput, messageInput);
+            await hubConnection.SendAsync(methodName: "SendMessage", userInput, messageInput);
         }
     }
 
@@ -38,12 +38,13 @@ public partial class Index : ComponentBase, IChatHubClient
     {
         if (hubConnection is not null)
         {
-            await hubConnection.SendAsync("JoinGroup", "WeatherForecastController");
+            await hubConnection.SendAsync(methodName: "SubcribeToChannel", "WeatherForecastController");
             monitorDisabled = true;
         }
     }
 
     public bool IsConnected => hubConnection?.State == HubConnectionState.Connected;
+
     public async ValueTask DisposeAsync()
     {
         if (hubConnection is not null)
@@ -51,5 +52,4 @@ public partial class Index : ComponentBase, IChatHubClient
             await hubConnection.DisposeAsync();
         }
     }
-
 }

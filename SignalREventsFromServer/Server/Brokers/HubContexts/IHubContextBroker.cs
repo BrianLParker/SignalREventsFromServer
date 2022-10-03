@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.SignalR;
-
-namespace SignalREventsFromServer.Server.Brokers.HubContexts;
+﻿namespace SignalREventsFromServer.Server.Brokers.HubContexts;
 
 public interface IHubContextBroker
 {

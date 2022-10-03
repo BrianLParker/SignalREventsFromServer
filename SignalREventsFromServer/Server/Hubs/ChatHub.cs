@@ -12,13 +12,13 @@ public class ChatHub : Hub<IChatHubClient>
         this.eventsService = eventsService;
 
     public async Task SendMessage(string user, string message) =>
-        await eventsService.SendMessageToAllClientsAsync(user, message);
+        await this.eventsService.SendMessageToAllClientsAsync(user, message);
 
     public async Task SendMessageToGroup(string groupName, string user, string message) =>
-        await eventsService.SendMessageToGroupAsync(groupName, user, message);
+        await this.eventsService.SendMessageToGroupAsync(groupName, user, message);
 
-    public async Task JoinGroup(string groupName) =>
-        await eventsService.SubcribeToChannelAsync(IdentityBroker.ConnectionId, groupName);
+    public async Task SubcribeToChannel(string channel) =>
+        await this.eventsService.SubcribeToChannelAsync(this.IdentityBroker.ConnectionId, channel);
 
     public IIdentityBroker IdentityBroker => new IdentityBroker(this.Context);
 }
