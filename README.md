@@ -1,9 +1,22 @@
+
 # SignalR Events From Server (POC)
 
 This shows how to send events via SignalR from the server. 
 
-I start from the MSDN SignalR tutorial. I create a broker that encapsulates the HubContext. 
+I start from the MSDN SignalR tutorial. I create a broker that encapsulates the HubContext. I then inject the broker into the `WeatherForecastController` to notify users when the controller action is called.
 
+```
+    public WeatherForecastController(
+        IHubContextBroker hubContext,
+        ILogger<WeatherForecastController> logger)
+...
+    [HttpGet]
+    public async Task<IEnumerable<WeatherForecast>> Get()
+    {
+        await this.hubContext.SendMessageToAllClients(sender: "Server Weather API Controller", message: "Get called!");
+...
+
+```
 ```cs
 public class ChatHub : Hub<IChatHubClient> { ... }
 ```
