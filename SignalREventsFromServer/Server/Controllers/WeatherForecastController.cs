@@ -26,13 +26,7 @@ public class WeatherForecastController : ControllerBase
     [HttpGet]
     public async Task<IEnumerable<WeatherForecast>> Get()
     {
-        await this.eventsService.SendMessageToGroupAsync(
-            groupName: "APIMonitor",
-            sender: "Server Weather API Controller",
-            message: "Get called!");
-
         await this.eventsService.NotifyGetRequestAsync(controller: "WeatherForecastController");
-
 
         return Enumerable.Range(1, 5).Select(index => new WeatherForecast
         {
